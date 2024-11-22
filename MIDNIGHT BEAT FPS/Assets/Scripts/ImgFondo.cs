@@ -41,11 +41,11 @@ public class ImgFondo : MonoBehaviour
                 // Asignar el color a la imagen
                 image.color = c;
 
-                // EvaluaciÃ³n de condiciones de cambio de estado (por tiempo o entrada de teclas)
+                // Evaluación de condiciones de cambio de estado (por tiempo o entrada de teclas)
                 if (Time.time - startTime > TimeOut)
                     State = SplashStates.Finish;
 
-                // Evaluar si se presionan teclas especÃ­ficas
+                // Evaluar si se presionan teclas específicas
                 if (Input.GetKey(KeyCode.Escape) || Input.GetKey(KeyCode.Return) || Input.GetKey(KeyCode.Space))
                     State = SplashStates.Finish;
 

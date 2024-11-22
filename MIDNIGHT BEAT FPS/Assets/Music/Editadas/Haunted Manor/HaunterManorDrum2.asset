@@ -1,0 +1,153 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1223223985, guid: aa81bbec85a3f423193272a7c6154986, type: 3}
+  m_Name: HaunterManorDrum2
+  m_EditorClassIdentifier: 
+  mEventID: HaunterManorDrum2
+  mEventList:
+  - mStartSample: 76960
+    mEndSample: 76960
+  - mStartSample: 118144
+    mEndSample: 118144
+  - mStartSample: 163696
+    mEndSample: 163696
+  - mStartSample: 208832
+    mEndSample: 208832
+  - mStartSample: 254176
+    mEndSample: 254176
+  - mStartSample: 299312
+    mEndSample: 299312
+  - mStartSample: 343824
+    mEndSample: 343824
+  - mStartSample: 389792
+    mEndSample: 389792
+  - mStartSample: 434720
+    mEndSample: 434720
+  - mStartSample: 479232
+    mEndSample: 479232
+  - mStartSample: 524160
+    mEndSample: 524160
+  - mStartSample: 569712
+    mEndSample: 569712
+  - mStartSample: 615680
+    mEndSample: 615680
+  - mStartSample: 661024
+    mEndSample: 661024
+  - mStartSample: 705536
+    mEndSample: 705536
+  - mStartSample: 750256
+    mEndSample: 750256
+  - mStartSample: 795808
+    mEndSample: 795808
+  - mStartSample: 840944
+    mEndSample: 840944
+  - mStartSample: 886912
+    mEndSample: 886912
+  - mStartSample: 971984
+    mEndSample: 971984
+  - mStartSample: 1017198
+    mEndSample: 1017198
+  - mStartSample: 1029808
+    mEndSample: 1029808
+  - mStartSample: 1063504
+    mEndSample: 1063504
+  - mStartSample: 1106768
+    mEndSample: 1106768
+  - mStartSample: 1119690
+    mEndSample: 1119690
+  - mStartSample: 1153776
+    mEndSample: 1153776
+  - mStartSample: 1195155
+    mEndSample: 1195155
+  - mStartSample: 1209520
+    mEndSample: 1209520
+  - mStartSample: 1244672
+    mEndSample: 1244672
+  - mStartSample: 1289392
+    mEndSample: 1289392
+  - mStartSample: 1300806
+    mEndSample: 1300806
+  - mStartSample: 1332656
+    mEndSample: 1332656
+  - mStartSample: 1377324
+    mEndSample: 1377324
+  - mStartSample: 1388608
+    mEndSample: 1388608
+  - mStartSample: 1423760
+    mEndSample: 1423760
+  - mStartSample: 1468064
+    mEndSample: 1468064
+  - mStartSample: 1478763
+    mEndSample: 1478763
+  - mStartSample: 1511952
+    mEndSample: 1511952
+  - mStartSample: 1555281
+    mEndSample: 1555281
+  - mStartSample: 1567072
+    mEndSample: 1567072
+  - mStartSample: 1602016
+    mEndSample: 1602016
+  - mStartSample: 1647152
+    mEndSample: 1647152
+  - mStartSample: 1658124
+    mEndSample: 1658124
+  - mStartSample: 1693952
+    mEndSample: 1693952
+  - mStartSample: 1737450
+    mEndSample: 1737450
+  - mStartSample: 1748240
+    mEndSample: 1748240
+  - mStartSample: 1784432
+    mEndSample: 1784432
+  - mStartSample: 1828944
+    mEndSample: 1828944
+  - mStartSample: 1874080
+    mEndSample: 1874080
+  - mStartSample: 1927536
+    mEndSample: 1927536
+  - mStartSample: 1963430
+    mEndSample: 1963430
+  - mStartSample: 2005080
+    mEndSample: 2005080
+  - mStartSample: 2054080
+    mEndSample: 2054080
+  - mStartSample: 2108960
+    mEndSample: 2108960
+  - mStartSample: 2144240
+    mEndSample: 2144240
+  - mStartSample: 2186380
+    mEndSample: 2186380
+  - mStartSample: 2232930
+    mEndSample: 2232930
+  - mStartSample: 2289035
+    mEndSample: 2289035
+  - mStartSample: 2323580
+    mEndSample: 2323580
+  - mStartSample: 2365475
+    mEndSample: 2365475
+  _SerializedPayloadTypes: []
+  _AssetPayloads: []
+  _AssetPayloadIdxs: 
+  _ColorPayloads: []
+  _ColorPayloadIdxs: 
+  _CurvePayloads: []
+  _CurvePayloadIdxs: 
+  _FloatPayloads: []
+  _FloatPayloadIdxs: 
+  _GradientPayloads: []
+  _GradientPayloadIdxs: 
+  _IntPayloads: []
+  _IntPayloadIdxs: 
+  _SpectrumPayloads: []
+  _SpectrumPayloadIdxs: 
+  _TextPayloads: []
+  _TextPayloadIdxs: 
