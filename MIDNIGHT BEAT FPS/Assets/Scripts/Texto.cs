@@ -4,27 +4,30 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 
-
-
-
-    
 public class Texto : MonoBehaviour
 {
-    Color oc; //Original Color
-    TMPro.TextMeshProUGUI texto; //Recoge el componente de tipo Texto que posee el GameObject al que está vinculado el escript
- 
-    [SerializeField]
-       float angulo, velAng = 1.0f; //Velocidad angular
+    Color oc; // Original Color
+    TMPro.TextMeshProUGUI texto; // Referencia al texto del botón
+    [SerializeField] float angulo, velAng = 1.0f; // Velocidad angular
 
+    void Start()
+    {
+        // Busca automáticamente el componente de texto dentro del botón
+        texto = GetComponentInChildren<TMPro.TextMeshProUGUI>();
+        if (texto == null)
+        {
+            Debug.LogError("No se encontró un TextMeshProUGUI en este botón.");
+            return;
+        }
 
-    void Start(){
-     texto = GetComponent<TMPro.TextMeshProUGUI>();
-     oc = texto.color;
-     if (velAng < 0.0f) velAng = -velAng;
+        oc = texto.color;
+        if (velAng < 0.0f) velAng = -velAng;
     }
 
+    void Update()
+    {
+        if (texto == null) return; // Asegura que el texto exista antes de continuar
 
-    void Update() {
         float seno = Mathf.Abs(Mathf.Sin(angulo));
 
         angulo += velAng * Time.deltaTime;
@@ -32,6 +35,4 @@ public class Texto : MonoBehaviour
 
         texto.color = oc * seno;
     }
-
-
 }

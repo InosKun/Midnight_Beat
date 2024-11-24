@@ -9,12 +9,12 @@ EditorBuildSettings:
     path: Assets/Scenes/interfaz.unity
     guid: a2c7a61a312514942a3ae52f93bff2f4
   - enabled: 1
-    path: Assets/Scenes/first person.unity
-    guid: 891bf4fcd7c7f452ca68588d12d8e0e5
+    path: Assets/Scenes/splash.unity
+    guid: e24a34f26e09442f9b79690b73463594
   - enabled: 1
     path: Assets/Scenes/MenuPpal.unity
     guid: 0b32c3384bf694ebd948a15aca5052d8
   - enabled: 1
-    path: Assets/Scenes/splash.unity
-    guid: e24a34f26e09442f9b79690b73463594
+    path: Assets/Scenes/first person.unity
+    guid: 891bf4fcd7c7f452ca68588d12d8e0e5
   m_configObjects: {}
