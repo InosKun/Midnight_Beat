@@ -30,10 +30,10 @@ public class MenuPpal : MonoBehaviour
         boton[i] = GameObject.Find(nombreBoton[i]).GetComponent<Button>();
 
         boton[(int)BotonesMenuPpal.MPPal_Play].onClick.AddListener(playClicked);
-        boton[(int)BotonesMenuPpal.MPPal_Option].onClick.AddListener(delegate { genericClicked("Pressed button Options"); 
+        boton[(int)BotonesMenuPpal.MPPal_Option].onClick.AddListener(optionsClicked); 
         boton[(int)BotonesMenuPpal.MPPal_Exit].onClick.AddListener(exitClicked);
-        });
-      }
+        }
+      
 
     void exitClicked() {
          Debug.Log("Botón Exit presionado");
@@ -50,9 +50,9 @@ public class MenuPpal : MonoBehaviour
        SceneManager.LoadScene("first person");
     }  
 
-     void genericClicked(string message) {
+     void optionsClicked() {
       //Output this to console when the Button is clicked
-    Debug.Log(message);
+      SceneManager.LoadScene("opciones");
     }  
 
      void Update() {
@@ -63,5 +63,6 @@ public class MenuPpal : MonoBehaviour
       if (Input.GetKey(KeyCode.Return))
         playClicked();
     }
+
 }
 
