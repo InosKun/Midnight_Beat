@@ -20,4 +20,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/opciones.unity
     guid: 352a94032bae64ac2b231312b4dfbb95
+  - enabled: 1
+    path: Assets/Scenes/Volumen.unity
+    guid: 4f75cf8b09abe417293ca4670955ddb5
+  - enabled: 1
+    path: Assets/Scenes/Controles.unity
+    guid: 0b74739b8374040358bfffe0205317a5
   m_configObjects: {}
