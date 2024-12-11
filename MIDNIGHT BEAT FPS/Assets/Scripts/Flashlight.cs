@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Flashlight : MonoBehaviour
 {
-    [SerializeField] private Light light;
+    [SerializeField] private new Light light;
     // Start is called before the first frame update
 
     // Update is called once per frame
