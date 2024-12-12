@@ -3,6 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 public class MouseLook : MonoBehaviour
 {
+    private Camera _camera;
+    void Start()
+    {
+        _camera = GetComponent<Camera>();
+        Cursor.lockState = CursorLockMode.Locked; // deja el ratón en el centro de la ventana
+        Cursor.visible = false;
+    }
     public enum RotationAxes
     { // Movimiento ratón
         MouseXandY = 0,
@@ -15,7 +22,7 @@ public class MouseLook : MonoBehaviour
     public float minPitchAngle = -45.0f; // rango de rotación vertical
     public float maxPitchAngle = 45.0f;
     private float pitchAngle = 0; // cabeceo (pitch) actual
-
+    
     void Update()
     {
         if (axes == RotationAxes.MouseX)
