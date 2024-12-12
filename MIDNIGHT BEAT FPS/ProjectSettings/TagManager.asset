@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Clock
+  - Candelabro
   layers:
   - Default
   - TransparentFX

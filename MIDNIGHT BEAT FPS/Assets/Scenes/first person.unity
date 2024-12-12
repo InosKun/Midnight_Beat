@@ -227,6 +227,7 @@ GameObject:
   - component: {fileID: 735809467}
   - component: {fileID: 735809469}
   - component: {fileID: 735809468}
+  - component: {fileID: 735809470}
   m_Layer: 0
   m_Name: characterCamera
   m_TagString: MainCamera
@@ -309,6 +310,23 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
+--- !u!114 &735809470
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 735809466}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbdb8838607d24a06a3dad841690f798, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  axes: 2
+  sensitivityHor: 9
+  sensitivityVert: 9
+  minPitchAngle: -45
+  maxPitchAngle: 45
 --- !u!1 &917084574 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100000, guid: 91811fda631823c49b536c0b67dfec68, type: 3}
@@ -473,6 +491,7 @@ GameObject:
   - component: {fileID: 1418319355}
   - component: {fileID: 1418319354}
   - component: {fileID: 1418319356}
+  - component: {fileID: 1418319358}
   - component: {fileID: 1418319357}
   m_Layer: 0
   m_Name: character
@@ -671,6 +690,23 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &1418319358
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1418319348}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d3cb696ba634904885be47a1aef98ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneName: ColumnasPrueba
+  maxInteractionDistance: 3
+  interactableLayer:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!1 &1429457709
 GameObject:
   m_ObjectHideFlags: 0
@@ -682,9 +718,11 @@ GameObject:
   - component: {fileID: 1429457712}
   - component: {fileID: 1429457711}
   - component: {fileID: 1429457710}
-  m_Layer: 0
+  - component: {fileID: 1429457714}
+  - component: {fileID: 1429457713}
+  m_Layer: 6
   m_Name: CandleStickLP
-  m_TagString: Untagged
+  m_TagString: Candelabro
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -748,12 +786,60 @@ Transform:
   m_GameObject: {fileID: 1429457709}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.43006897, y: -1.0009999, z: -2.671327}
+  m_LocalPosition: {x: -0.43006897, y: 0.194, z: -2.671327}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1190491054}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1429457713
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1429457709}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.4831, y: 0.66519994, z: 0.1618}
+  m_Center: {x: -0.0006499961, y: 0.33439997, z: 0}
+--- !u!54 &1429457714
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1429457709}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1001 &1491386757
 PrefabInstance:
   m_ObjectHideFlags: 0
