@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement; // For scene loading
 using SonicBloom.Koreo;
 
 public class BeatDetector : MonoBehaviour
@@ -13,6 +14,16 @@ public class BeatDetector : MonoBehaviour
     public Text feedbackText;              // Reference to the UI Text for feedback
     public float feedbackDuration = 0.5f; // Duration to display feedback text
 
+    [Header("Score Tracking")]
+    public int pointsPerHit = 5;           // Points awarded per correct hit
+    private int correctHits = 0;           // Number of correct timings
+    private int totalScore = 0;            // Total score
+
+    [Header("Score Screen")]
+    public GameObject scoreScreenUI;       // Reference to the Score Screen UI
+    public Text scoreText;                 // Text element to display the score
+    public Text hitCountText;              // Text element to display correct hits
+
     private bool canPress = false;         // Determines if the player can press spacebar
     private float beatTime;                // Time of the current beat
     private float timingWindow = 0.2f;     // Timing window for a valid hit (± seconds)
@@ -21,6 +32,12 @@ public class BeatDetector : MonoBehaviour
     {
         // Register Koreographer event listener
         Koreographer.Instance.RegisterForEvents(eventID, OnBeatDetected);
+
+        // Ensure the score screen is hidden at the start
+        if (scoreScreenUI != null)
+        {
+            scoreScreenUI.SetActive(false);
+        }
     }
 
     void OnDestroy()
@@ -35,6 +52,11 @@ public class BeatDetector : MonoBehaviour
         if (canPress && Input.GetKeyDown(KeyCode.Space))
         {
             EvaluateInput();
+        }
+
+        if (!Koreographer.Instance.GetComponent<AudioSource>().isPlaying)
+        {
+            EndMinigame();
         }
     }
 
@@ -56,6 +78,8 @@ public class BeatDetector : MonoBehaviour
         // Check if the player's timing is within the allowed window
         if (timeDifference <= timingWindow)
         {
+            correctHits = correctHits + 1; // Increment correct hit count
+            totalScore += pointsPerHit; // Add points
             ShowFeedback("Great!"); // Correct timing feedback
         }
         else
@@ -79,5 +103,50 @@ public class BeatDetector : MonoBehaviour
     {
         feedbackText.text = ""; // Clear the feedback text
     }
+
+    public void EndMinigame()
+    {
+        // Show the score screen
+        if (scoreScreenUI != null)
+        {
+            scoreScreenUI.SetActive(true);
+        }
+
+        // Update the score screen texts
+        if (scoreText != null)
+        {
+            scoreText.text = "Score: " + totalScore;
+        }
+        if (hitCountText != null)
+        {
+            // Display the correct hits
+            hitCountText.text = "Correct Hits: " + correctHits;
+        }
+
+        // Add a performance grade (separate from correct hits)
+        if (scoreText != null)
+        {
+            if (totalScore >= 100)
+            {
+                scoreText.text += "\nGrade: Perfect!";
+            }
+            else if (totalScore >= 50)
+            {
+                scoreText.text += "\nGrade: Good!";
+            }
+            else
+            {
+                scoreText.text += "\nGrade: Try Again!";
+            }
+        }
+    }
+
+    public void BackToMuseum()
+    {
+        // Change to the first-person scene (replace "MuseumScene" with your scene name)
+        SceneManager.LoadScene("first person");
+    }
 }
+
+
 
