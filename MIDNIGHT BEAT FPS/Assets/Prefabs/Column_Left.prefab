@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1131449678720813286}
   - component: {fileID: 8305407754591565905}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Column_Left
-  m_TagString: Untagged
+  m_TagString: Column
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -72,7 +72,7 @@ GameObject:
   - component: {fileID: 1415144266776361892}
   - component: {fileID: 5983157520328500433}
   - component: {fileID: 368852624328038685}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Fuste
   m_TagString: Untagged
   m_Icon: {fileID: 0}
