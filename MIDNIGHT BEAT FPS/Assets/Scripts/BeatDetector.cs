@@ -71,22 +71,38 @@ public class BeatDetector : MonoBehaviour
     {
         canPress = false; // Disable further input for this beat
 
-        // Calculate the timing difference
         float inputTime = Time.time;
-        float timeDifference = Mathf.Abs(inputTime - beatTime);
+        float timeDifference = inputTime - beatTime; // Positive = late, Negative = early
 
-        // Check if the player's timing is within the allowed window
-        if (timeDifference <= timingWindow)
+        // Check timing accuracy and provide feedback
+        if (Mathf.Abs(timeDifference) <= 0.1f) // Perfect Timing (within ±0.1 seconds)
         {
-            correctHits = correctHits + 1; // Increment correct hit count
-            totalScore += pointsPerHit; // Add points
-            ShowFeedback("Great!"); // Correct timing feedback
+            correctHits++;
+            totalScore += pointsPerHit;
+            ShowFeedback("Perfect!");
         }
-        else
+        else if (timeDifference > 0.1f && timeDifference <= timingWindow) // Late Good Timing
         {
-            ShowFeedback(""); // No feedback for incorrect timing
+            correctHits++;
+            totalScore += pointsPerHit / 2; // Half points for "Good"
+            ShowFeedback("Good!");
+        }
+        else if (timeDifference >= -timingWindow && timeDifference < -0.1f) // Early Good Timing
+        {
+            correctHits++;
+            totalScore += pointsPerHit / 2; // Half points for "Good"
+            ShowFeedback("Good!");
+        }
+        else if (timeDifference < -timingWindow) // Too Early (Missed)
+        {
+            ShowFeedback("Too Early!");
+        }
+        else // Too Late (Missed)
+        {
+            ShowFeedback("Too Late!");
         }
     }
+
 
     void ShowFeedback(string message)
     {
@@ -106,6 +122,7 @@ public class BeatDetector : MonoBehaviour
 
     public void EndMinigame()
     {
+
         // Show the score screen
         if (scoreScreenUI != null)
         {
@@ -115,12 +132,12 @@ public class BeatDetector : MonoBehaviour
         // Update the score screen texts
         if (scoreText != null)
         {
-            scoreText.text = "Score: " + totalScore;
+            scoreText.text = "Puntuación: " + totalScore;
         }
         if (hitCountText != null)
         {
             // Display the correct hits
-            hitCountText.text = "Correct Hits: " + correctHits;
+            hitCountText.text = "Perfectos: " + correctHits;
         }
 
         // Add a performance grade (separate from correct hits)
@@ -128,15 +145,15 @@ public class BeatDetector : MonoBehaviour
         {
             if (totalScore >= 100)
             {
-                scoreText.text += "\nGrade: Perfect!";
+                scoreText.text += "\nNota: Perfecto!";
             }
             else if (totalScore >= 50)
             {
-                scoreText.text += "\nGrade: Good!";
+                scoreText.text += "\nNota: Está bien";
             }
             else
             {
-                scoreText.text += "\nGrade: Try Again!";
+                scoreText.text += "\nNota: Inténtalo de nuevo...";
             }
         }
     }
