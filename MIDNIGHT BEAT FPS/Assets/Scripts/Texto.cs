@@ -4,11 +4,15 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 
+
+
+
 public class Texto : MonoBehaviour
 {
     Color oc; // Original Color
     TMPro.TextMeshProUGUI texto; // Referencia al texto del botón
-    [SerializeField] float angulo, velAng = 1.0f; // Velocidad angular
+    [SerializeField] float angulo, velAng = 1.0f;
+   // Velocidad angular
 
     void Start()
     {
