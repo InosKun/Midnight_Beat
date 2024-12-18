@@ -5,8 +5,9 @@ using UnityEngine.SceneManagement; // Necesario para manejar escenas
 
 public class CambioEscenaConTecla : MonoBehaviour
 {
-    [SerializeField] private string MenuPpal; // Nombre de la escena a cargar
+   
     [SerializeField] private KeyCode teclaCambio = KeyCode.Space; // Tecla que detectará
+    [SerializeField] float tiempoEspera = 3.0f;
 
     void Update()
     {
@@ -14,9 +15,9 @@ public class CambioEscenaConTecla : MonoBehaviour
         if (Input.GetKeyDown(teclaCambio))
         {
             // Si se especifica un nombre de escena, la carga
-            if (!string.IsNullOrEmpty(MenuPpal))
+            if (!string.IsNullOrEmpty("MenuPpal"))
             {
-                SceneManager.LoadScene(MenuPpal);
+                SceneManager.LoadScene("MenuPpal");
             }
             else
             {
@@ -25,5 +26,19 @@ public class CambioEscenaConTecla : MonoBehaviour
                 SceneManager.LoadScene("MenuPpal");
             }
         }
+    }
+
+    void Start()
+    {
+        StartCoroutine(CambiarEscena());
+    }
+
+    IEnumerator CambiarEscena()
+    {
+        // Espera el tiempo especificado
+        yield return new WaitForSeconds(tiempoEspera);
+
+        // Carga la siguiente escena
+        SceneManager.LoadScene("MenuPpal");
     }
 }

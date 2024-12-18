@@ -479,8 +479,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3d0580b9b997434f84cbd2a2afa14b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MenuPpal: 
   teclaCambio: 32
+  tiempoEspera: 3
 --- !u!1 &823625244
 GameObject:
   m_ObjectHideFlags: 0

@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 
 enum BotonesMenuPpal { MPPal_Play,
 MPPal_Option,
+MPPal_Credits,
 MPPal_Exit,
 MPPal_TotalBotones }
 
@@ -17,6 +18,7 @@ public class MenuPpal : MonoBehaviour
      string[] nombreBoton = {
         "Play",
         "Options",
+        "Creditos",
         "Exit"};
 
       Button[] boton;
@@ -31,6 +33,7 @@ public class MenuPpal : MonoBehaviour
 
         boton[(int)BotonesMenuPpal.MPPal_Play].onClick.AddListener(playClicked);
         boton[(int)BotonesMenuPpal.MPPal_Option].onClick.AddListener(optionsClicked); 
+        boton[(int)BotonesMenuPpal.MPPal_Credits].onClick.AddListener(creditsClicked);
         boton[(int)BotonesMenuPpal.MPPal_Exit].onClick.AddListener(exitClicked);
         }
       
@@ -53,6 +56,11 @@ public class MenuPpal : MonoBehaviour
      void optionsClicked() {
       //Output this to console when the Button is clicked
       SceneManager.LoadScene("opciones");
+    }  
+
+      void creditsClicked() {
+      //Output this to console when the Button is clicked
+      SceneManager.LoadScene("Creditos");
     }  
 
      void Update() {
