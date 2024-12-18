@@ -14,7 +14,8 @@ GameObject:
   - component: {fileID: 6405055329939876226}
   - component: {fileID: 791330179735114672}
   - component: {fileID: 6167229978712145972}
-  m_Layer: 8
+  - component: {fileID: 5488193754572502853}
+  m_Layer: 7
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -1656,3 +1657,15 @@ MonoBehaviour:
     handleAnimatorIK: 0
   fsmTemplate: {fileID: 0}
   eventHandlerComponentsAdded: 0
+--- !u!114 &5488193754572502853
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6991570179449477765}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1f8c08998d7fcd4685924521479ad05, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

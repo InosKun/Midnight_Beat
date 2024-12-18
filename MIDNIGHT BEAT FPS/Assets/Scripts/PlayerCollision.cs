@@ -6,12 +6,16 @@ public class PlayerCollision : MonoBehaviour
 {
     void OnTriggerEnter(Collider other)
     {
+        Debug.Log("Collision Detected with: " + other.name); // Log the name of the colliding object
+
         if (other.CompareTag("Capital"))
         {
-            // Inform the manager about a miss
+            Debug.Log("Capital Hit Detected!");
             FindObjectOfType<ColumnMinigameManager>().PlayerHit();
-            Destroy(other.gameObject); // Destroy the capital after collision
+            Destroy(other.gameObject); // Remove the capital after it hits the player
         }
     }
+
 }
+
 

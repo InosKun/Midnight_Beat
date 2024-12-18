@@ -8,18 +8,28 @@ public class CapitalDestroyer : MonoBehaviour
 
     void Update()
     {
+        // Check if the capital falls below the destroyHeight
         if (transform.position.y <= destroyHeight)
         {
-            Destroy(gameObject); // Destroy the capital if it falls below the destroy height
+            // Notify the manager that this is a successful dodge
+            ColumnMinigameManager manager = FindObjectOfType<ColumnMinigameManager>();
+            if (manager != null)
+            {
+                manager.PlayerDodged(); // Increment the dodge count and score
+            }
+
+            Destroy(gameObject); // Destroy the capital
         }
     }
 
     void OnCollisionEnter(Collision collision)
     {
+        // Destroy the capital if it collides with a column
         if (collision.gameObject.CompareTag("Column"))
         {
-            Destroy(gameObject); // Destroy the capital when it touches a column
+            Destroy(gameObject);
         }
     }
 }
+
 
