@@ -30,12 +30,6 @@ public class FallingCapitalsSpawner : MonoBehaviour
         Koreographer.Instance.RegisterForEvents(eventID, OnBeatDetected);
     }
 
-    void OnDestroy()
-    {
-        // Unregister Koreographer event listener
-        Koreographer.Instance.UnregisterForEvents(eventID, OnBeatDetected);
-    }
-
     void OnBeatDetected(KoreographyEvent koreoEvent)
     {
         // Schedule a spawn to ensure capitals reach columns on the beat

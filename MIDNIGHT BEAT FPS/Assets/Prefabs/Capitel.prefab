@@ -13,10 +13,10 @@ GameObject:
   - component: {fileID: 7468100292709482201}
   - component: {fileID: 6690295415639851328}
   - component: {fileID: 2084575810067191125}
-  - component: {fileID: 5351113891526556493}
+  - component: {fileID: 8160340119454862002}
   m_Layer: 7
   m_Name: Capitel
-  m_TagString: Untagged
+  m_TagString: Capital
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -134,7 +134,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &5351113891526556493
+--- !u!114 &8160340119454862002
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
