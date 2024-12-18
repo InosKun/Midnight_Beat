@@ -7,39 +7,39 @@ using UnityEngine.SceneManagement;
 public class ColumnMinigameManager : MonoBehaviour, IPausable
 {
     [Header("Koreographer Settings")]
-    public string eventID = "SpookyThingsDrum"; // Koreographer beat track
+    public string eventID = "SpookyThingsDrum"; // Event ID para detectar el beat de koreographer
 
     [Header("Falling Capital Settings")]
-    public GameObject capitalPrefab;       // Prefab for the falling capitals
-    public Transform[] spawnPoints;       // Array of spawn positions (left, center, right)
-    public float fallSpeed = 5f;          // Initial speed of falling capitals
-    private int lastSpawnIndex = -1;      // To track the last spawn position
-    private int maxConsecutiveSpawns = 2; // Prevent consecutive spawns at the same column
-    private int consecutiveSpawns = 0;   // Track current consecutive spawns at the same position
+    public GameObject capitalPrefab;       // Prefab de los capiteles
+    public Transform[] spawnPoints;       // Array de los spawns de los capiteles
+    public float fallSpeed = 5f;          // Velocidad inicial de los capiteles
+    private int lastSpawnIndex = -1;      // Para saber cuál fue el último punto de spawn
+    private int maxConsecutiveSpawns = 2; // Que no salgan más de 2 capiteles seguidos
+    private int consecutiveSpawns = 0;   // Cuantos capiteles seguidos han habido
 
     [Header("Score Settings")]
-    public int pointsPerDodge = 10;       // Points for dodging a capital
-    public int penaltyForHit = 5;         // Points deducted for getting hit
-    private int dodgedCount = 0;          // Count of successful dodges
-    private int totalScore = 0;           // Total score
+    public int pointsPerDodge = 10;       // Puntos por esquivar
+    public int penaltyForHit = 5;         // Reducción si te pegan los capiteles
+    private int dodgedCount = 0;          // Recuento de esquivas
+    private int totalScore = 0;           // Puntuación total
 
     [Header("Score Screen")]
-    public GameObject scoreScreenUI;      // Reference to the score screen canvas
-    public Text scoreText;                // Text to display total score
-    public Text dodgedText;               // Text to display successful dodges
-    public Button backToMuseumButton;     // Button to return to the museum
+    public GameObject scoreScreenUI;      
+    public Text scoreText;                
+    public Text dodgedText;               
+    public Button backToMuseumButton;     // Botón para volver al museo
 
     [Header("Gameplay Feedback")]
-    public Text feedbackText;             // Real-time feedback ("Dodged!", "Miss!")
-    public float feedbackDuration = 0.5f; // Duration to show feedback
+    public Text feedbackText;             // Texto de feedback
+    public float feedbackDuration = 0.5f; // duración del feedback
 
     [Header("Difficulty Settings")]
-    public float scalingInterval = 10f;   // Time interval for increasing difficulty
-    public float fallSpeedIncrement = 1f; // Amount to increase fall speed
-    private float elapsedTime = 0f;       // Elapsed time for scaling difficulty
+    public float scalingInterval = 10f;   // intervalo de tiempo para incrementar la velocidad
+    public float fallSpeedIncrement = 1f; // cuanto se va a incrementar la velocidad
+    private float elapsedTime = 0f;       
 
     private bool gameEnded = false;
-    private bool isPaused = false;        // Tracks if the game is paused
+    private bool isPaused = false;        
 
     void Start()
     {
@@ -60,7 +60,7 @@ public class ColumnMinigameManager : MonoBehaviour, IPausable
     {
         if (gameEnded || isPaused) return;
 
-        // Use PauseMenuManager to check if the game is paused
+        // Pausar el juego
         if (FindObjectOfType<PauseMenuManager>().IsGamePaused())
         {
             return;
@@ -70,7 +70,7 @@ public class ColumnMinigameManager : MonoBehaviour, IPausable
         if (elapsedTime >= scalingInterval)
         {
             elapsedTime = 0f;
-            fallSpeed += fallSpeedIncrement; // Increase fall speed
+            fallSpeed += fallSpeedIncrement; // incrementar velocidad de caída
         }
 
         if (!Koreographer.Instance.GetComponent<AudioSource>().isPlaying)

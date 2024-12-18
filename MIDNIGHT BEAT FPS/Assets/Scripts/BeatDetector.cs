@@ -2,41 +2,40 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement; // For scene loading
+using UnityEngine.SceneManagement; // Para Cambiar de escena
 using SonicBloom.Koreo;
 
 public class BeatDetector : MonoBehaviour, IPausable
 {
     [Header("Koreographer Settings")]
-    public string eventID = "HaunterManorDrum"; // Event ID for the Koreographer beat track
+    public string eventID = "HaunterManorDrum"; // Event ID para detectar el beat de koreographer
 
     [Header("Feedback UI")]
-    public Text feedbackText;              // Reference to the UI Text for feedback
-    public float feedbackDuration = 0.5f; // Duration to display feedback text
+    public Text feedbackText;              // referencia al UI para el feedback
+    public float feedbackDuration = 0.5f; // la duración del feedback
 
     [Header("Score Tracking")]
-    public int pointsPerHit = 5;           // Points awarded per correct hit
-    private int correctHits = 0;           // Number of correct timings
-    private int totalScore = 0;            // Total score
+    public int pointsPerHit = 5;           // puntos por acierto
+    private int correctHits = 0;           // número de aciertos
+    private int totalScore = 0;            // puntuación total
 
     [Header("Score Screen")]
-    public GameObject scoreScreenUI;       // Reference to the Score Screen UI
-    public Text scoreText;                 // Text element to display the score
-    public Text hitCountText;              // Text element to display correct hits
+    public GameObject scoreScreenUI;       // referencia al UI para el screenScore
+    public Text scoreText;                 // texto para puntuación
+    public Text hitCountText;              // texto para aciertos
 
-    private bool canPress = false;         // Determines if the player can press spacebar
-    private float beatTime;                // Time of the current beat
-    private float timingWindow = 0.2f;     // Timing window for a valid hit (± seconds)
+    private bool canPress = false;         // si se puede presionar el espacio o no
+    private float beatTime;                // tiempo en el que se enuentra el beat actual
+    private float timingWindow = 0.2f;     // acotación para aceptar aciertos perfectos
 
-    private bool isPaused = false;         // Tracks if the game is paused
-    private bool gameEnded = false;        // Tracks if the minigame has ended
+    private bool isPaused = false;         // juego en pausa
+    private bool gameEnded = false;        // juego terminado
 
     void Start()
     {
-        // Register Koreographer event listener
+        // El eventListener del Koreographer
         Koreographer.Instance.RegisterForEvents(eventID, OnBeatDetected);
 
-        // Ensure the score screen is hidden at the start
         if (scoreScreenUI != null)
         {
             scoreScreenUI.SetActive(false);
@@ -45,7 +44,6 @@ public class BeatDetector : MonoBehaviour, IPausable
 
     void OnDestroy()
     {
-        // Unregister Koreographer event listener
         Koreographer.Instance.UnregisterForEvents(eventID, OnBeatDetected);
     }
 
@@ -53,7 +51,7 @@ public class BeatDetector : MonoBehaviour, IPausable
     {
         if (isPaused || gameEnded) return;
 
-        // Use PauseMenuManager to check if the game is paused
+        // Para saber si se ha pausado el juego
         if (FindObjectOfType<PauseMenuManager>().IsGamePaused())
         {
             return;
@@ -77,42 +75,42 @@ public class BeatDetector : MonoBehaviour, IPausable
 
     void OnBeatDetected(KoreographyEvent koreoEvent)
     {
-        // A beat has occurred; allow player input
+        // Permite que se presione el espacio porque ha habido un beat
         canPress = true;
-        beatTime = Time.time; // Record the time of the beat
+        beatTime = Time.time;
     }
 
     void EvaluateInput()
     {
-        canPress = false; // Disable further input for this beat
+        canPress = false; 
 
         float inputTime = Time.time;
-        float timeDifference = inputTime - beatTime; // Positive = late, Negative = early
+        float timeDifference = inputTime - beatTime; // positivo = tarde, Negativo = pronto
 
-        // Check timing accuracy and provide feedback
-        if (Mathf.Abs(timeDifference) <= 0.1f) // Perfect Timing (within ±0.1 seconds)
+        // mirar el timing para saber qué texto mostrar
+        if (Mathf.Abs(timeDifference) <= 0.1f) // Perfecto (within ±0.1 seconds)
         {
             correctHits++;
             totalScore += pointsPerHit;
             ShowFeedback("¡Perfecto!");
         }
-        else if (timeDifference > 0.1f && timeDifference <= timingWindow) // Late Good Timing
+        else if (timeDifference > 0.1f && timeDifference <= timingWindow) // Bueno pero un poco tarde
         {
             correctHits++;
-            totalScore += pointsPerHit / 2; // Half points for "Good"
+            totalScore += pointsPerHit / 2; // Mitad de puntos para los Buenos
             ShowFeedback("Bien");
         }
-        else if (timeDifference >= -timingWindow && timeDifference < -0.1f) // Early Good Timing
+        else if (timeDifference >= -timingWindow && timeDifference < -0.1f) // Bueno pero un poco pronto
         {
             correctHits++;
-            totalScore += pointsPerHit / 2; // Half points for "Good"
+            totalScore += pointsPerHit / 2;
             ShowFeedback("Bien");
         }
-        else if (timeDifference < -timingWindow) // Too Early (Missed)
+        else if (timeDifference < -timingWindow) // Muy pronto
         {
             ShowFeedback("¡Muy pronto!");
         }
-        else // Too Late (Missed)
+        else // Muy tarde
         {
             ShowFeedback("¡Muy tarde!");
         }
@@ -121,9 +119,9 @@ public class BeatDetector : MonoBehaviour, IPausable
 
     void ShowFeedback(string message)
     {
-        feedbackText.text = message; // Display the feedback message
+        feedbackText.text = message; // Feedback
 
-        // If feedback is not empty, schedule clearing the text
+        // Hay que quitar el mensaje una vez que pase el tiempo indicado
         if (!string.IsNullOrEmpty(message))
         {
             Invoke(nameof(ClearFeedback), feedbackDuration);
@@ -132,31 +130,31 @@ public class BeatDetector : MonoBehaviour, IPausable
 
     void ClearFeedback()
     {
-        feedbackText.text = ""; // Clear the feedback text
+        feedbackText.text = "";
     }
 
     public void EndMinigame()
     {
         gameEnded = true;
 
-        // Show the score screen
+        // muestra la scoreScreen
         if (scoreScreenUI != null)
         {
             scoreScreenUI.SetActive(true);
         }
 
-        // Update the score screen texts
+        // Los textos de la scoreScreen
         if (scoreText != null)
         {
             scoreText.text = "Puntuación: " + totalScore;
         }
         if (hitCountText != null)
         {
-            // Display the correct hits
+           
             hitCountText.text = "Perfectos: " + correctHits;
         }
 
-        // Add a performance grade (separate from correct hits)
+        // Nota dependiendo de los puntos
         if (scoreText != null)
         {
             if (totalScore >= 100)
@@ -176,7 +174,7 @@ public class BeatDetector : MonoBehaviour, IPausable
 
     public void BackToMuseum()
     {
-        // Change to the first-person scene (replace "MuseumScene" with your scene name)
+        // Para volver al museo
         SceneManager.LoadScene("first person");
     }
 
