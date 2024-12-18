@@ -1,10 +1,10 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 using SonicBloom.Koreo;
+using UnityEngine.SceneManagement;
 
-public class ColumnMinigameManager : MonoBehaviour
+public class ColumnMinigameManager : MonoBehaviour, IPausable
 {
     [Header("Koreographer Settings")]
     public string eventID = "SpookyThingsDrum"; // Koreographer beat track
@@ -39,36 +39,33 @@ public class ColumnMinigameManager : MonoBehaviour
     private float elapsedTime = 0f;       // Elapsed time for scaling difficulty
 
     private bool gameEnded = false;
+    private bool isPaused = false;        // Tracks if the game is paused
 
     void Start()
     {
-        // Ensure the score screen is hidden initially
         if (scoreScreenUI != null)
         {
             scoreScreenUI.SetActive(false);
         }
 
-        // Register Koreographer event listener
         Koreographer.Instance.RegisterForEvents(eventID, OnBeatDetected);
 
-        // Assign the button's OnClick event programmatically
         if (backToMuseumButton != null)
         {
             backToMuseumButton.onClick.AddListener(BackToMuseum);
         }
     }
 
-    void OnDestroy()
-    {
-        // Unregister Koreographer event listener
-        Koreographer.Instance.UnregisterForEvents(eventID, OnBeatDetected);
-    }
-
     void Update()
     {
-        if (gameEnded) return;
+        if (gameEnded || isPaused) return;
 
-        // Gradually increase difficulty over time
+        // Use PauseMenuManager to check if the game is paused
+        if (FindObjectOfType<PauseMenuManager>().IsGamePaused())
+        {
+            return;
+        }
+
         elapsedTime += Time.deltaTime;
         if (elapsedTime >= scalingInterval)
         {
@@ -76,14 +73,17 @@ public class ColumnMinigameManager : MonoBehaviour
             fallSpeed += fallSpeedIncrement; // Increase fall speed
         }
 
-        // End the minigame when the music stops
         if (!Koreographer.Instance.GetComponent<AudioSource>().isPlaying)
         {
             EndMinigame();
         }
     }
 
-    // Called by Koreographer when a beat event is detected
+    public void SetPaused(bool paused)
+    {
+        isPaused = paused;
+    }
+
     void OnBeatDetected(KoreographyEvent koreoEvent)
     {
         SpawnCapital();
@@ -91,7 +91,6 @@ public class ColumnMinigameManager : MonoBehaviour
 
     void SpawnCapital()
     {
-        // Randomly select a spawn point
         int spawnIndex;
         do
         {
@@ -99,7 +98,6 @@ public class ColumnMinigameManager : MonoBehaviour
         }
         while (spawnIndex == lastSpawnIndex && consecutiveSpawns >= maxConsecutiveSpawns);
 
-        // Update consecutive spawn tracking
         if (spawnIndex == lastSpawnIndex)
         {
             consecutiveSpawns++;
@@ -110,25 +108,22 @@ public class ColumnMinigameManager : MonoBehaviour
             lastSpawnIndex = spawnIndex;
         }
 
-        // Spawn the capital
         GameObject newCapital = Instantiate(capitalPrefab, spawnPoints[spawnIndex].position, Quaternion.identity);
         Rigidbody rb = newCapital.GetComponent<Rigidbody>();
-        rb.velocity = new Vector3(0, -fallSpeed, 0); // Apply downward velocity
+        rb.velocity = new Vector3(0, -fallSpeed, 0);
     }
 
     public void PlayerDodged()
     {
-        // Increment score and show feedback
         dodgedCount++;
         totalScore += pointsPerDodge;
-        ShowFeedback("Dodged!");
+        ShowFeedback("Perfecto!");
     }
 
     public void PlayerHit()
     {
-        // Deduct points and show feedback
         totalScore -= penaltyForHit;
-        ShowFeedback("Miss!");
+        ShowFeedback("Fallo!");
     }
 
     void ShowFeedback(string message)
@@ -136,8 +131,6 @@ public class ColumnMinigameManager : MonoBehaviour
         if (feedbackText != null)
         {
             feedbackText.text = message;
-
-            // Clear feedback after a delay
             Invoke(nameof(ClearFeedback), feedbackDuration);
         }
     }
@@ -154,45 +147,39 @@ public class ColumnMinigameManager : MonoBehaviour
     {
         gameEnded = true;
 
-        // Show the score screen
         if (scoreScreenUI != null)
         {
             scoreScreenUI.SetActive(true);
         }
 
-        // Update score screen texts
         if (scoreText != null)
         {
-            scoreText.text = "Score: " + totalScore;
+            scoreText.text = "Puntuación: " + totalScore;
         }
         if (dodgedText != null)
         {
-            dodgedText.text = "Dodged: " + dodgedCount;
+            dodgedText.text = "Capiteles esquivados: " + dodgedCount;
         }
 
-        // Add performance grade to the score text
         if (scoreText != null)
         {
-            if (totalScore >= 100)
+            if (totalScore >= 1000)
             {
-                scoreText.text += "\nGrade: Perfect!";
+                scoreText.text += "\nNota: ¡Perfecto!";
             }
-            else if (totalScore >= 50)
+            else if (totalScore >= 500)
             {
-                scoreText.text += "\nGrade: Good!";
+                scoreText.text += "\nNota: Está bien";
             }
             else
             {
-                scoreText.text += "\nGrade: Try Again!";
+                scoreText.text += "\nNota: Inténtalo de nuevo...";
             }
         }
     }
 
     public void BackToMuseum()
     {
-        Debug.Log("Returning to Museum..."); // For debugging
-        SceneManager.LoadScene("first person"); // Replace with your museum scene's name
+        SceneManager.LoadScene("first person");
     }
 }
-
-

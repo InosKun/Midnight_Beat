@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement; // For scene loading
 using SonicBloom.Koreo;
 
-public class BeatDetector : MonoBehaviour
+public class BeatDetector : MonoBehaviour, IPausable
 {
     [Header("Koreographer Settings")]
     public string eventID = "HaunterManorDrum"; // Event ID for the Koreographer beat track
@@ -28,6 +28,9 @@ public class BeatDetector : MonoBehaviour
     private float beatTime;                // Time of the current beat
     private float timingWindow = 0.2f;     // Timing window for a valid hit (± seconds)
 
+    private bool isPaused = false;         // Tracks if the game is paused
+    private bool gameEnded = false;        // Tracks if the minigame has ended
+
     void Start()
     {
         // Register Koreographer event listener
@@ -48,7 +51,14 @@ public class BeatDetector : MonoBehaviour
 
     void Update()
     {
-        // Check for player input only if a beat is active
+        if (isPaused || gameEnded) return;
+
+        // Use PauseMenuManager to check if the game is paused
+        if (FindObjectOfType<PauseMenuManager>().IsGamePaused())
+        {
+            return;
+        }
+
         if (canPress && Input.GetKeyDown(KeyCode.Space))
         {
             EvaluateInput();
@@ -58,6 +68,11 @@ public class BeatDetector : MonoBehaviour
         {
             EndMinigame();
         }
+    }
+
+    public void SetPaused(bool paused)
+    {
+        isPaused = paused;
     }
 
     void OnBeatDetected(KoreographyEvent koreoEvent)
@@ -79,27 +94,27 @@ public class BeatDetector : MonoBehaviour
         {
             correctHits++;
             totalScore += pointsPerHit;
-            ShowFeedback("Perfect!");
+            ShowFeedback("¡Perfecto!");
         }
         else if (timeDifference > 0.1f && timeDifference <= timingWindow) // Late Good Timing
         {
             correctHits++;
             totalScore += pointsPerHit / 2; // Half points for "Good"
-            ShowFeedback("Good!");
+            ShowFeedback("Bien");
         }
         else if (timeDifference >= -timingWindow && timeDifference < -0.1f) // Early Good Timing
         {
             correctHits++;
             totalScore += pointsPerHit / 2; // Half points for "Good"
-            ShowFeedback("Good!");
+            ShowFeedback("Bien");
         }
         else if (timeDifference < -timingWindow) // Too Early (Missed)
         {
-            ShowFeedback("Too Early!");
+            ShowFeedback("¡Muy pronto!");
         }
         else // Too Late (Missed)
         {
-            ShowFeedback("Too Late!");
+            ShowFeedback("¡Muy tarde!");
         }
     }
 
@@ -122,6 +137,7 @@ public class BeatDetector : MonoBehaviour
 
     public void EndMinigame()
     {
+        gameEnded = true;
 
         // Show the score screen
         if (scoreScreenUI != null)
@@ -163,7 +179,9 @@ public class BeatDetector : MonoBehaviour
         // Change to the first-person scene (replace "MuseumScene" with your scene name)
         SceneManager.LoadScene("first person");
     }
+
 }
+
 
 
 
