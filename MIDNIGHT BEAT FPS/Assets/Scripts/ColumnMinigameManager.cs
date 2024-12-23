@@ -1,89 +1,89 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 using SonicBloom.Koreo;
+using UnityEngine.SceneManagement;
 
-public class ColumnMinigameManager : MonoBehaviour
+public class ColumnMinigameManager : MonoBehaviour, IPausable
 {
     [Header("Koreographer Settings")]
-    public string eventID = "SpookyThingsDrum"; // Koreographer beat track
+    public string eventID = "SpookyThingsDrum"; // Event ID para detectar el beat de koreographer
 
     [Header("Falling Capital Settings")]
-    public GameObject capitalPrefab;       // Prefab for the falling capitals
-    public Transform[] spawnPoints;       // Array of spawn positions (left, center, right)
-    public float fallSpeed = 5f;          // Initial speed of falling capitals
-    private int lastSpawnIndex = -1;      // To track the last spawn position
-    private int maxConsecutiveSpawns = 2; // Prevent consecutive spawns at the same column
-    private int consecutiveSpawns = 0;   // Track current consecutive spawns at the same position
+    public GameObject capitalPrefab;       // Prefab de los capiteles
+    public Transform[] spawnPoints;       // Array de los spawns de los capiteles
+    public float fallSpeed = 5f;          // Velocidad inicial de los capiteles
+    private int lastSpawnIndex = -1;      // Para saber cuál fue el último punto de spawn
+    private int maxConsecutiveSpawns = 2; // Que no salgan más de 2 capiteles seguidos
+    private int consecutiveSpawns = 0;   // Cuantos capiteles seguidos han habido
 
     [Header("Score Settings")]
-    public int pointsPerDodge = 10;       // Points for dodging a capital
-    public int penaltyForHit = 5;         // Points deducted for getting hit
-    private int dodgedCount = 0;          // Count of successful dodges
-    private int totalScore = 0;           // Total score
+    public int pointsPerDodge = 10;       // Puntos por esquivar
+    public int penaltyForHit = 5;         // Reducción si te pegan los capiteles
+    private int dodgedCount = 0;          // Recuento de esquivas
+    private int totalScore = 0;           // Puntuación total
 
     [Header("Score Screen")]
-    public GameObject scoreScreenUI;      // Reference to the score screen canvas
-    public Text scoreText;                // Text to display total score
-    public Text dodgedText;               // Text to display successful dodges
-    public Button backToMuseumButton;     // Button to return to the museum
+    public GameObject scoreScreenUI;      
+    public Text scoreText;                
+    public Text dodgedText;               
+    public Button backToMuseumButton;     // Botón para volver al museo
 
     [Header("Gameplay Feedback")]
-    public Text feedbackText;             // Real-time feedback ("Dodged!", "Miss!")
-    public float feedbackDuration = 0.5f; // Duration to show feedback
+    public Text feedbackText;             // Texto de feedback
+    public float feedbackDuration = 0.5f; // duración del feedback
 
     [Header("Difficulty Settings")]
-    public float scalingInterval = 10f;   // Time interval for increasing difficulty
-    public float fallSpeedIncrement = 1f; // Amount to increase fall speed
-    private float elapsedTime = 0f;       // Elapsed time for scaling difficulty
+    public float scalingInterval = 10f;   // intervalo de tiempo para incrementar la velocidad
+    public float fallSpeedIncrement = 1f; // cuanto se va a incrementar la velocidad
+    private float elapsedTime = 0f;       
 
     private bool gameEnded = false;
+    private bool isPaused = false;        
 
     void Start()
     {
-        // Ensure the score screen is hidden initially
         if (scoreScreenUI != null)
         {
             scoreScreenUI.SetActive(false);
         }
 
-        // Register Koreographer event listener
         Koreographer.Instance.RegisterForEvents(eventID, OnBeatDetected);
 
-        // Assign the button's OnClick event programmatically
         if (backToMuseumButton != null)
         {
             backToMuseumButton.onClick.AddListener(BackToMuseum);
         }
     }
 
-    void OnDestroy()
-    {
-        // Unregister Koreographer event listener
-        Koreographer.Instance.UnregisterForEvents(eventID, OnBeatDetected);
-    }
-
     void Update()
     {
-        if (gameEnded) return;
+        if (gameEnded || isPaused) return;
 
-        // Gradually increase difficulty over time
+        // Pausar el juego
+        if (FindObjectOfType<PauseMenuManager>().IsGamePaused())
+        {
+            return;
+        }
+
         elapsedTime += Time.deltaTime;
         if (elapsedTime >= scalingInterval)
         {
             elapsedTime = 0f;
-            fallSpeed += fallSpeedIncrement; // Increase fall speed
+            fallSpeed += fallSpeedIncrement; // incrementar velocidad de caída
         }
 
-        // End the minigame when the music stops
         if (!Koreographer.Instance.GetComponent<AudioSource>().isPlaying)
         {
             EndMinigame();
         }
     }
 
-    // Called by Koreographer when a beat event is detected
+    public void SetPaused(bool paused)
+    {
+        isPaused = paused;
+    }
+
     void OnBeatDetected(KoreographyEvent koreoEvent)
     {
         SpawnCapital();
@@ -91,7 +91,6 @@ public class ColumnMinigameManager : MonoBehaviour
 
     void SpawnCapital()
     {
-        // Randomly select a spawn point
         int spawnIndex;
         do
         {
@@ -99,7 +98,6 @@ public class ColumnMinigameManager : MonoBehaviour
         }
         while (spawnIndex == lastSpawnIndex && consecutiveSpawns >= maxConsecutiveSpawns);
 
-        // Update consecutive spawn tracking
         if (spawnIndex == lastSpawnIndex)
         {
             consecutiveSpawns++;
@@ -110,25 +108,22 @@ public class ColumnMinigameManager : MonoBehaviour
             lastSpawnIndex = spawnIndex;
         }
 
-        // Spawn the capital
         GameObject newCapital = Instantiate(capitalPrefab, spawnPoints[spawnIndex].position, Quaternion.identity);
         Rigidbody rb = newCapital.GetComponent<Rigidbody>();
-        rb.velocity = new Vector3(0, -fallSpeed, 0); // Apply downward velocity
+        rb.velocity = new Vector3(0, -fallSpeed, 0);
     }
 
     public void PlayerDodged()
     {
-        // Increment score and show feedback
         dodgedCount++;
         totalScore += pointsPerDodge;
-        ShowFeedback("Dodged!");
+        ShowFeedback("Perfecto!");
     }
 
     public void PlayerHit()
     {
-        // Deduct points and show feedback
         totalScore -= penaltyForHit;
-        ShowFeedback("Miss!");
+        ShowFeedback("Fallo!");
     }
 
     void ShowFeedback(string message)
@@ -136,8 +131,6 @@ public class ColumnMinigameManager : MonoBehaviour
         if (feedbackText != null)
         {
             feedbackText.text = message;
-
-            // Clear feedback after a delay
             Invoke(nameof(ClearFeedback), feedbackDuration);
         }
     }
@@ -154,45 +147,39 @@ public class ColumnMinigameManager : MonoBehaviour
     {
         gameEnded = true;
 
-        // Show the score screen
         if (scoreScreenUI != null)
         {
             scoreScreenUI.SetActive(true);
         }
 
-        // Update score screen texts
         if (scoreText != null)
         {
-            scoreText.text = "Score: " + totalScore;
+            scoreText.text = "Puntuación: " + totalScore;
         }
         if (dodgedText != null)
         {
-            dodgedText.text = "Dodged: " + dodgedCount;
+            dodgedText.text = "Capiteles esquivados: " + dodgedCount;
         }
 
-        // Add performance grade to the score text
         if (scoreText != null)
         {
-            if (totalScore >= 100)
+            if (totalScore >= 1000)
             {
-                scoreText.text += "\nGrade: Perfect!";
+                scoreText.text += "\nNota: ¡Perfecto!";
             }
-            else if (totalScore >= 50)
+            else if (totalScore >= 500)
             {
-                scoreText.text += "\nGrade: Good!";
+                scoreText.text += "\nNota: Está bien";
             }
             else
             {
-                scoreText.text += "\nGrade: Try Again!";
+                scoreText.text += "\nNota: Inténtalo de nuevo...";
             }
         }
     }
 
     public void BackToMuseum()
     {
-        Debug.Log("Returning to Museum..."); // For debugging
-        SceneManager.LoadScene("first person"); // Replace with your museum scene's name
+        SceneManager.LoadScene("first person");
     }
 }
-
-
