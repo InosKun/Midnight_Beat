@@ -1,36 +1,58 @@
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro; // Si usas TextMeshPro
+using TMPro;
 
 public class SliderController : MonoBehaviour
 {
-    public Slider slider; // Referencia al Slider
-    public TextMeshProUGUI sliderValueText; // Para mostrar el valor (opcional)
+    [Header("UI References")]
+    public Slider slider;                 // Reference to the slider
+    public TextMeshProUGUI sliderValueText; // Optional: To display the slider value
+
+    [Header("Slider Settings")]
+    public float displayMin = 1f;         // Minimum value displayed on the slider
+    public float displayMax = 100f;       // Maximum value displayed on the slider
+    public float displayStart = 50f;      // Starting value displayed on the slider
+
+    private float internalMin = -50f;     // Internal minimum value for Audio Mixer
+    private float internalMax = 50f;      // Internal maximum value for Audio Mixer
 
     void Start()
     {
-        // Asegúrate de que el Slider tenga un valor inicial
         if (slider != null)
         {
+            slider.minValue = displayMin;
+            slider.maxValue = displayMax;
+
+            // Initialize slider to match current volume
+            float currentVolume = AudioManager.Instance.GetVolume();
+            slider.value = Remap(currentVolume, internalMin, internalMax, displayMin, displayMax);
+
             slider.onValueChanged.AddListener(OnSliderValueChanged);
             UpdateSliderText(slider.value);
         }
     }
 
-    // Método que se llama cuando el Slider cambia
-    public void OnSliderValueChanged(float value)
+    public void OnSliderValueChanged(float displayValue)
     {
-        Debug.Log("Valor del Slider: " + value);
-        UpdateSliderText(value);
+        float internalValue = Remap(displayValue, displayMin, displayMax, internalMin, internalMax);
+
+        // Update the volume via the AudioManager
+        AudioManager.Instance.SetVolume(internalValue);
+
+        UpdateSliderText(displayValue);
     }
 
-    // Actualiza el texto con el valor del Slider
-    private void UpdateSliderText(float value)
+    private void UpdateSliderText(float displayValue)
     {
         if (sliderValueText != null)
         {
-            sliderValueText.text = Mathf.RoundToInt(value).ToString(); // Opcional: Redondea a entero
+            sliderValueText.text = Mathf.RoundToInt(displayValue).ToString();
         }
     }
-}
 
+    // Remaps a value from one range to another
+    private float Remap(float value, float fromMin, float fromMax, float toMin, float toMax)
+    {
+        return toMin + (value - fromMin) * (toMax - toMin) / (fromMax - fromMin);
+    }
+}

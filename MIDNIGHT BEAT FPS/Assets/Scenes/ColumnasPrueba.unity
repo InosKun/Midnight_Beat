@@ -506,9 +506,9 @@ MonoBehaviour:
   - {fileID: 1489491128}
   - {fileID: 515217312}
   - {fileID: 1713587113}
-  fallSpeed: 5
+  fallSpeed: 10
   pointsPerDodge: 5
-  penaltyForHit: 1
+  penaltyForHit: 4
   scoreScreenUI: {fileID: 725509283}
   scoreText: {fileID: 279816248}
   dodgedText: {fileID: 552204438}
@@ -516,7 +516,7 @@ MonoBehaviour:
   feedbackText: {fileID: 0}
   feedbackDuration: 3
   scalingInterval: 10
-  fallSpeedIncrement: 1
+  fallSpeedIncrement: 3
 --- !u!4 &251022947
 Transform:
   m_ObjectHideFlags: 0

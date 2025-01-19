@@ -944,7 +944,7 @@ MonoBehaviour:
   m_MinValue: 1
   m_MaxValue: 100
   m_WholeNumbers: 1
-  m_Value: 1
+  m_Value: 50
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -962,6 +962,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   slider: {fileID: 499483577}
   sliderValueText: {fileID: 1380345507}
+  displayMin: 1
+  displayMax: 100
+  displayStart: 50
 --- !u!1 &675354403
 GameObject:
   m_ObjectHideFlags: 0
@@ -1016,6 +1019,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   slider: {fileID: 675354406}
   sliderValueText: {fileID: 1678141557}
+  displayMin: 1
+  displayMax: 100
+  displayStart: 50
 --- !u!114 &675354406
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1063,7 +1069,7 @@ MonoBehaviour:
   m_MinValue: 1
   m_MaxValue: 100
   m_WholeNumbers: 1
-  m_Value: 1
+  m_Value: 50
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -2230,7 +2236,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 1
+  m_text: '1
+
+'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
   m_sharedMaterial: {fileID: 2164040, guid: 5302535af1044152a457ed104f1f4b91, type: 2}

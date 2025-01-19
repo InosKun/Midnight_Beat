@@ -159,7 +159,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 185, y: -77}
+  m_AnchoredPosition: {x: 185, y: -38}
   m_SizeDelta: {x: 405, y: 195}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!95 &48939229
@@ -777,7 +777,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -168, y: -192}
+  m_AnchoredPosition: {x: -168, y: -153}
   m_SizeDelta: {x: 405, y: 195}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!95 &246659946
@@ -920,7 +920,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -350, y: 225.94}
+  m_AnchoredPosition: {x: -350, y: 176}
   m_SizeDelta: {x: 241.6457, y: 127.62}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!95 &313891880
@@ -1063,7 +1063,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 185, y: -192}
+  m_AnchoredPosition: {x: 185, y: -153}
   m_SizeDelta: {x: 405, y: 195}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!95 &386598298
@@ -1274,7 +1274,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -168, y: -77}
+  m_AnchoredPosition: {x: -168, y: -38}
   m_SizeDelta: {x: 405, y: 195}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!95 &471740355
@@ -1954,7 +1954,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 53.8, y: -168}
+  m_AnchoredPosition: {x: 53.8, y: -217}
   m_SizeDelta: {x: 845.8717, y: 305.7808}
   m_Pivot: {x: 0.5804425, y: 0.47411013}
 --- !u!114 &1545314087
@@ -2004,8 +2004,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 90
-  m_fontSizeBase: 90
+  m_fontSize: 70
+  m_fontSizeBase: 70
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18

@@ -163,11 +163,11 @@ public class ColumnMinigameManager : MonoBehaviour, IPausable
 
         if (scoreText != null)
         {
-            if (totalScore >= 1000)
+            if (totalScore >= 2000)
             {
                 scoreText.text += "\nNota: ¡Perfecto!";
             }
-            else if (totalScore >= 500)
+            else if (totalScore >= 1000)
             {
                 scoreText.text += "\nNota: Está bien";
             }

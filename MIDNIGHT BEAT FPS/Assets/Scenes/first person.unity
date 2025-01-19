@@ -727,7 +727,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 134c613b4a9914ef49b1899688457f51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 6
+  speed: 4
   gravity: -9.8
 --- !u!114 &1418319356
 MonoBehaviour:
@@ -1036,6 +1036,30 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1190491054}
     m_Modifications:
+    - target: {fileID: 1547871868319433355, guid: c0410f2a730b2e844868698e32b882b8, type: 3}
+      propertyPath: m_Size.x
+      value: 0.6701069
+      objectReference: {fileID: 0}
+    - target: {fileID: 1547871868319433355, guid: c0410f2a730b2e844868698e32b882b8, type: 3}
+      propertyPath: m_Size.y
+      value: 5.00575
+      objectReference: {fileID: 0}
+    - target: {fileID: 1547871868319433355, guid: c0410f2a730b2e844868698e32b882b8, type: 3}
+      propertyPath: m_Size.z
+      value: 4.480751
+      objectReference: {fileID: 0}
+    - target: {fileID: 1547871868319433355, guid: c0410f2a730b2e844868698e32b882b8, type: 3}
+      propertyPath: m_Center.x
+      value: -0.22622585
+      objectReference: {fileID: 0}
+    - target: {fileID: 1547871868319433355, guid: c0410f2a730b2e844868698e32b882b8, type: 3}
+      propertyPath: m_Center.y
+      value: 0.99604964
+      objectReference: {fileID: 0}
+    - target: {fileID: 1547871868319433355, guid: c0410f2a730b2e844868698e32b882b8, type: 3}
+      propertyPath: m_Center.z
+      value: -0.11882973
+      objectReference: {fileID: 0}
     - target: {fileID: 2141348889413841955, guid: c0410f2a730b2e844868698e32b882b8, type: 3}
       propertyPath: m_Layer
       value: 6
