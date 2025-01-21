@@ -4,15 +4,16 @@ using UnityEngine;
 
 public class Flashlight : MonoBehaviour
 {
-    [SerializeField] private new Light light;
-    // Start is called before the first frame update
+    [SerializeField] private new Light light; // Referencia a la luz.
 
-    // Update is called once per frame
+    // Update se llama una vez por frame.
     void Update()
     {
-        if (Input.GetMouseButtonDown(0)) {
-            light.enabled = !light.enabled;
+        // Detecta si se presiona la barra espaciadora.
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            light.enabled = !light.enabled; // Alterna el estado de la luz.
         }
-        
     }
 }
+
