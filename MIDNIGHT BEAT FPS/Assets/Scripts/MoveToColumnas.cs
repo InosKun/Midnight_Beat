@@ -6,9 +6,9 @@ using UnityEngine.SceneManagement;
 public class MoveToColumnas : MonoBehaviour
 {
     [Header("Settings")]
-    public string sceneName = "ColumnasPrueba"; // Name of the scene to load
+    //public string sceneName = "ColumnasPrueba"; // Name of the scene to load
     public float maxInteractionDistance = 3f; // Maximum distance to interact with the object
-    public LayerMask interactableLayer; // Layer mask for the interactable object (Clock)
+    public LayerMask interactableLayer; // Layer mask for the interactable object (Columna)
 
     void Update()
     {
@@ -22,11 +22,11 @@ public class MoveToColumnas : MonoBehaviour
             // Check if the ray hits an object within the max distance
             if (Physics.Raycast(ray, out hit, maxInteractionDistance, interactableLayer))
             {
-                // Verify if the hit object is the Candelabro
-                if (hit.collider.CompareTag("Candelabro"))
+                // Verify if the hit object is the Columna
+                if (hit.collider.CompareTag("Columna"))
                 {
                     // Load the scene
-                    SceneManager.LoadScene("ColumnasPrueba");
+                    SceneManager.LoadScene("LoadingColumnas");
                 }
             }
         }
