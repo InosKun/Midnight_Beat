@@ -111,7 +111,20 @@ public class ColumnMinigameManager : MonoBehaviour, IPausable
         GameObject newCapital = Instantiate(capitalPrefab, spawnPoints[spawnIndex].position, Quaternion.identity);
         Rigidbody rb = newCapital.GetComponent<Rigidbody>();
         rb.velocity = new Vector3(0, -fallSpeed, 0);
+
+        // Ignore collision between capitals
+        Collider capitalCollider = newCapital.GetComponent<Collider>();
+        Collider[] otherCapitals = FindObjectsOfType<Collider>();
+
+        foreach (Collider other in otherCapitals)
+        {
+            if (other.gameObject.CompareTag("Capital"))
+            {
+                Physics.IgnoreCollision(capitalCollider, other);
+            }
+        }
     }
+
 
     public void PlayerDodged()
     {

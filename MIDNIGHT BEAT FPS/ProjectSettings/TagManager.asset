@@ -4,15 +4,15 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Clock
-  - Candelabro
   - Column
   - Capital
+  - Cuadro
+  - Columna
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - PlayerLayer
   - Water
   - UI
   - Interactable

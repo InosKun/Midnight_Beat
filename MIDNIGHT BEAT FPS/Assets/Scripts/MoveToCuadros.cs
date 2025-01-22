@@ -6,9 +6,9 @@ using UnityEngine.SceneManagement;
 public class MoveToCuadros : MonoBehaviour
 {
     [Header("Settings")]
-    public string sceneName = "Cuadros"; // Name of the scene to load
+    //public string sceneName = "LoadingCuadros"; // Name of the scene to load
     public float maxInteractionDistance = 3f; // Maximum distance to interact with the object
-    public LayerMask interactableLayer; // Layer mask for the interactable object (Clock)
+    public LayerMask interactableLayer; // Layer mask for the interactable object (Cuadro)
 
     void Update()
     {
@@ -22,11 +22,11 @@ public class MoveToCuadros : MonoBehaviour
             // Check if the ray hits an object within the max distance
             if (Physics.Raycast(ray, out hit, maxInteractionDistance, interactableLayer))
             {
-                // Verify if the hit object is the Clock
-                if (hit.collider.CompareTag("Clock"))
+                // Verify if the hit object is the Cuadro
+                if (hit.collider.CompareTag("Cuadro"))
                 {
                     // Load the scene
-                    SceneManager.LoadScene("Cuadros");
+                    SceneManager.LoadScene("LoadingCuadros");  // Load the loading screen first
                 }
             }
         }

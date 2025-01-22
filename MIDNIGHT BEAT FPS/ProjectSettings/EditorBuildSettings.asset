@@ -35,4 +35,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/ColumnasPrueba.unity
     guid: df77f8157e5456f4b957db8c3aca0463
+  - enabled: 1
+    path: Assets/Scenes/LoadingCuadros.unity
+    guid: 96f25d7e124199643b6c2195f9d5177c
+  - enabled: 1
+    path: Assets/Scenes/LoadingColumnas.unity
+    guid: 504a1bb637d8f254a9c711615c706ed3
   m_configObjects: {}
