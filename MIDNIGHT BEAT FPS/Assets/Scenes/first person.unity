@@ -1494,81 +1494,6 @@ MonoBehaviour:
   sensitivityVert: 9
   minPitchAngle: -45
   maxPitchAngle: 45
---- !u!1001 &779413981
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: -8679921383154817045, guid: cde7cf8a2678500448e17d50118c2432, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 29.82872
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: cde7cf8a2678500448e17d50118c2432, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -48.37964
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: cde7cf8a2678500448e17d50118c2432, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 72.11172
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: cde7cf8a2678500448e17d50118c2432, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: cde7cf8a2678500448e17d50118c2432, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: cde7cf8a2678500448e17d50118c2432, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: cde7cf8a2678500448e17d50118c2432, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: cde7cf8a2678500448e17d50118c2432, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: cde7cf8a2678500448e17d50118c2432, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: cde7cf8a2678500448e17d50118c2432, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 919132149155446097, guid: cde7cf8a2678500448e17d50118c2432, type: 3}
-      propertyPath: m_Name
-      value: MidnigthBeatMuseum
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: cde7cf8a2678500448e17d50118c2432, type: 3}
---- !u!1 &946042317 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8164078558771037576, guid: edaea1fe2aae94bd4b19c243ff9c15b9, type: 3}
-  m_PrefabInstance: {fileID: 1491386757}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &946042319
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 946042317}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b192e417e038a44e98b603d241d6fff2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  light: {fileID: 0}
 --- !u!1 &1065497391
 GameObject:
   m_ObjectHideFlags: 0
@@ -2994,9 +2919,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: edaea1fe2aae94bd4b19c243ff9c15b9, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1361606856}
-    - targetCorrespondingSourceObject: {fileID: 8164078558771037576, guid: edaea1fe2aae94bd4b19c243ff9c15b9, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 946042319}
   m_SourcePrefab: {fileID: 100100000, guid: edaea1fe2aae94bd4b19c243ff9c15b9, type: 3}
 --- !u!1 &1547992370
 GameObject:
@@ -3298,4 +3220,3 @@ SceneRoots:
   - {fileID: 1235342572}
   - {fileID: 53785156}
   - {fileID: 193402497}
-  - {fileID: 779413981}
